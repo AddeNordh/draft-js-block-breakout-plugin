@@ -32,7 +32,11 @@ You can pass options to the plugin as you call it:
 ```js
 const options = {
   breakoutBlockType: 'unordered-list-item',
-  breakoutBlocks: ['header-one', 'header-two']
+  breakoutBlocks: ['header-one', 'header-two'],
+  onBlockBreakout: (blockType) => {
+      // the block type that was "broken"
+      console.log(blockType);
+    }
 }
 const blockBreakoutPlugin = createBlockBreakoutPlugin(options)
 ```
@@ -44,6 +48,7 @@ The options and their defaults are:
 | `breakoutBlockType` | `String` | Block type to insert when breaking out | `'unstyled'`
 | `breakoutBlocks` | `Array` | List of block types to break out from | `['header-one', 'header-two', 'header-three', 'header-four', 'header-five', 'header-six']`
 | `doubleBreakoutBlocks` | `Array` | List of block types to that require return on a blank line in order to break | `['blockquote', 'unordered-list-item', 'ordered-list-item', 'code-block']`
+| `onBlockBreakout` | `function` | A callback to be executed when the block brakes. Receives the block type as argument | `() => {}`
 
 ## Developing
 

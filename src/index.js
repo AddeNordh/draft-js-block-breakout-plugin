@@ -26,6 +26,7 @@ const defaults = {
     'ordered-list-item',
     'code-block',
   ],
+  onBlockBreakout: () => {},
 }
 
 /**
@@ -47,6 +48,7 @@ export default function blockBreakoutPlugin (options = {}) {
   const breakoutBlockType = options.breakoutBlockType || defaults.breakoutBlockType
   const breakoutBlocks = options.breakoutBlocks || defaults.breakoutBlocks
   const doubleBreakoutBlocks = options.doubleBreakoutBlocks || defaults.doubleBreakoutBlocks
+  const onBlockBreakout = options.onBlockBreakout || defaults.onBlockBreakout
 
   return {
     handleReturn (e, editorState, { setEditorState }) {
@@ -129,6 +131,7 @@ export default function blockBreakoutPlugin (options = {}) {
             setEditorState(
               EditorState.push(editorState, newContentState, 'split-block')
             )
+            onBlockBreakout(currentBlockType)
             return 'handled'
           }
         }
